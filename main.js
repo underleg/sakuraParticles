@@ -86,22 +86,27 @@ function cleanUpPetals() {
 }
 
 
-// button response
-function buttonAction() {
+function createPetals() {
 
     let numPetals = document.getElementById("numPetals").value;
+    let imageNum = 0;
     let delay = 0;
 
-    let imageNum = 0;
-
-    cleanUpPetals();
-    
-    for (let i = 0; i < numPetals; i=i+2) {
+    for (let i = 0; i < numPetals; i = i + 2) {
         imageNum++;
         delay += 2;
-        petals[petals.length] = new Petal(lSpawnRect, lAttractor, (imageNum % 4) + 1, delay, app.stage);
-        petals[petals.length] = new Petal(rSpawnRect, rAttractor, (imageNum % 4) + 1, delay, app.stage);
+        petals[petals.length] = new Petal(i, lSpawnRect, lAttractor, (imageNum % 4) + 1, delay, app.stage);
+        petals[petals.length] = new Petal(i+1, rSpawnRect, rAttractor, (imageNum % 4) + 1, delay, app.stage);
     }
+}
+
+
+// button response
+function buttonAction() {
+    
+    cleanUpPetals();
+
+    createPetals();
 }
 
 
@@ -111,13 +116,19 @@ createSpawnRects();
 createAttractors();
 
 // sort
-app.stage.children.sort(function (a, b) {
-    if (a.distToAttractor != undefined && b.distToAttractor != undefined) {
-        return a.distToAttractor > b.distToAttractor;
-    } else {
-        return true;
-    }
-});
+function sortSprites() {
+    app.stage.children.sort(function (a, b) {
+        if (a.ident != undefined && b.ident != undefined) {
+            if (a.ident > b.ident) {
+                return -1;
+            } else {
+                return 1;
+            }
+        } else {
+            return 0;
+        }
+    });
+}
 
 // Add a ticker callback to move the sprite back and forth
 let elapsed = 0.0;
@@ -135,5 +146,7 @@ app.ticker.add((delta) => {
     if (updatePetals(delta)) {
         cleanUpPetals();
     }
+
+    sortSprites();
 });
 

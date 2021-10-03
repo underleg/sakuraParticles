@@ -1,12 +1,15 @@
 class Petal {
-    constructor(spawnRect, attractor, imageNum, delay, container) {
+    constructor(id, spawnRect, attractor, imageNum, delay, container) {
 
-        let name = "petal0" + imageNum + ".png";
+       let name = "petal0" + imageNum + ".png";
 
         this.sprite = PIXI.Sprite.from(name);
 
         this.sprite.x = 0.5;
         this.sprite.y = 0.5;
+
+        this.sprite.ident = id;
+
 
         container.addChild(this.sprite);
     
