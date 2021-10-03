@@ -12,8 +12,8 @@ var ywindow = window.innerHeight
     || document.body.clientHeight;
 
 
-let y1 = ysize * 2 / 5;
-let y2 = ysize * 3 / 5;
+let y1 = ysize * 3 / 10;
+let y2 = ysize - ysize * 3 / 10;
 
 
 // Create the application helper and add its render target to the page
@@ -50,9 +50,10 @@ function createSpawnRects() {
     let xOffset = xsize / 5;
     let w = xsize / 10;
     let h = ysize / 2;
+    let yDelta = ysize / 10;
 
-    lSpawnRect = new SpawnRectangle(-xOffset, y1, w, h, app.stage);
-    rSpawnRect = new SpawnRectangle(xsize + xOffset, y2, w,h, app.stage);
+    lSpawnRect = new SpawnRectangle(-xOffset, y1 - yDelta, w, h, app.stage);
+    rSpawnRect = new SpawnRectangle(xsize + xOffset, y2 + yDelta, w,h, app.stage);
 }
 
 // create petal attractors (left and right)
