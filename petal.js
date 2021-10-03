@@ -50,7 +50,11 @@ class Petal {
         } else if (this.delay > 0.0) {
             this.delay -= delta;
         } else {
-         
+
+            let scaleDelta = 0.001 * delta;
+            this.sprite.scale.x += scaleDelta;
+            this.sprite.scale.y += scaleDelta;
+
             this.sprite.rotation += (this.rotateDelta * delta) * Math.PI / 180;
 
             let distX = (this.attractor.getX() - this.x);
