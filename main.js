@@ -48,7 +48,7 @@ function loadBackground() {
 // create spawn rectangles (left and right)
 function createSpawnRects() {
     let xOffset = xsize / 5;
-    let w = xsize / 10;
+    let w = xsize / 100;
     let h = ysize / 2;
     let yDelta = ysize / 10;
 
