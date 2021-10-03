@@ -17,6 +17,9 @@ class Petal {
 
         this.delay = parseInt(delay); 
 
+        this.active = true;
+        this.lastDist = 999999;
+
         this.updateSpriteCoords();
 
         this.attractor = attractor;
@@ -34,11 +37,17 @@ class Petal {
 
     }
 
-    update(delta) {
-        if (this.delay > 0.0) {
+    // updates 1 petal's movement - returns when the journey is complete 
+    update(xsize, delta) {
+
+        let res = false;
+
+        if (this.active == false) {
+            res = true; 
+        } else if (this.delay > 0.0) {
             this.delay -= delta;
         } else {
-
+         
             this.sprite.rotation += (this.rotateDelta * delta) * Math.PI / 180;
 
             let distX = (this.attractor.getX() - this.x);
@@ -50,7 +59,7 @@ class Petal {
             if (this.distToAttractor == 0.0) {
                 this.distToAttractor = 1.0;
             }
-     
+        
             let coefficient = this.pull * delta / this.distToAttractor;
 
             this.dx += distX * coefficient;
@@ -60,7 +69,20 @@ class Petal {
             this.y += this.dy;
 
             this.updateSpriteCoords();
+
+            if (this.distToAttractor > this.lastDist) {
+
+                let xOffset = 2 * this.sprite.width;
+                if (this.x < - xOffset || this.x > xsize + xOffset) {
+                    this.active = false;
+                }
+            }
+
+            this.lastDist = this.distToAttractor;
+
         }
+
+        return res;
     }
 
     updateSpriteCoords() {

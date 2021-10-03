@@ -64,11 +64,17 @@ function createAttractors() {
 }
 
 
+// return true whne all petals have stopped
 function updatePetals(delta) {
+    let res = true;
+
     // particle update loop
     for (i = 0; i < petals.length; ++i) {
-        petals[i].update(delta);
+        if (!petals[i].update(xsize, delta)) {
+            res = false;
+        }
     }
+    return res;
 }
 
 function cleanUpPetals() {
@@ -84,7 +90,6 @@ function cleanUpPetals() {
 function buttonAction() {
 
     let numPetals = document.getElementById("numPetals").value;
-    let delayStep = document.getElementById("delay").value;
     let delay = 0;
 
     let imageNum = 0;
@@ -93,7 +98,7 @@ function buttonAction() {
     
     for (let i = 0; i < numPetals; i=i+2) {
         imageNum++;
-        delay += 5;
+        delay += 2;
         petals[petals.length] = new Petal(lSpawnRect, lAttractor, (imageNum % 4) + 1, delay, app.stage);
         petals[petals.length] = new Petal(rSpawnRect, rAttractor, (imageNum % 4) + 1, delay, app.stage);
     }
@@ -127,7 +132,8 @@ app.ticker.add((delta) => {
         rAttractor.updateAttractor(delta);
     }
 
-    updatePetals(delta); // todo rm
-
+    if (updatePetals(delta)) {
+        cleanUpPetals();
+    }
 });
 
