@@ -78,13 +78,21 @@ class Petal {
 
             this.updateSpriteCoords();
 
+            // if petal is heading away from the attract and is outside the screen area, reset it 
             if (this.distToAttractor > this.lastDist) {
 
-                let xOffset = 2 * this.sprite.width;
-                if (this.x < - xOffset || this.x > xsize + xOffset) {
-                    this.active = false;
+                // if looping set scale
+                if (looping) {
+                    this.sprite.scale.x = 1.0;
+                    this.sprite.scale.y = 1.0;
+                } else { // disable petal
+                    let xOffset = 2 * this.sprite.width;
+                    if (this.x < - xOffset || this.x > xsize + xOffset) {
+                        this.active = false;
+                    }
                 }
             }
+            
 
             this.lastDist = this.distToAttractor;
 

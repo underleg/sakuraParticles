@@ -1,4 +1,5 @@
 const showBoxes = false;
+const looping = false;
 
 const xsize = 1920;
 const ysize = 1920;

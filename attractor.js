@@ -14,7 +14,6 @@ class Attractor {
         this.x = x;
         this.y = y;
 
-        this.angle = Math.floor(Math.random() * 360);
     }
 
   
