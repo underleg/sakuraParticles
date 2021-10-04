@@ -51,6 +51,7 @@ class Petal {
             this.delay -= delta;
         } else {
 
+            // make petal grow gradually
             let scaleDelta = 0.001 * delta;
             this.sprite.scale.x += scaleDelta;
             this.sprite.scale.y += scaleDelta;

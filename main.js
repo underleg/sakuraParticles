@@ -135,14 +135,7 @@ let elapsed = 0.0;
 app.ticker.add((delta) => {
 
     elapsed += delta;
-    if (lAttractor) {
-        lAttractor.updateAttractor(delta);
-    }
-
-    if (rAttractor) {
-        rAttractor.updateAttractor(delta);
-    }
-
+   
     if (updatePetals(delta)) {
         cleanUpPetals();
     }

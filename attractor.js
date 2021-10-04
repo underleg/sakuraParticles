@@ -17,17 +17,12 @@ class Attractor {
         this.angle = Math.floor(Math.random() * 360);
     }
 
-    updateAttractor(delta) {
-        this.angle += 5 * delta;
-    }
-
+  
     getX() {
-        let res = 0 * Math.cos(this.angle * Math.PI / 180.0);
-        return res + this.x;
+        return this.x;
     }
 
     getY() {
-        let res = 0 * Math.sin(this.angle * Math.PI / 180.0);
-        return res + this.y;
+        return this.y;
     }
 }
